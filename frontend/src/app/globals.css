@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0c;
+  --foreground: #f2f1f4;
+
+  --panel: #131316;
+  --border: #232328;
+  --text-secondary: #8a8891;
+
+  /* gradient trio — the one signature color move. Used together, not scattered. */
+  --accent-violet: #7c5cfc;
+  --accent-blue: #4e8cff;
+  --accent-pink: #e85fa0;
+  --accent-gradient: linear-gradient(135deg, var(--accent-violet), var(--accent-blue) 55%, var(--accent-pink));
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-panel: var(--panel);
+  --color-border: var(--border);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent-violet: var(--accent-violet);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-pink: var(--accent-pink);
+  --font-sans: "General Sans", sans-serif;
+  --font-mono: var(--font-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.text-gradient {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gradient-accent {
+  background: var(--accent-gradient);
+}

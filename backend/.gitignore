@@ -1,0 +1,47 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Environment variables (keep example template tracked)
+.env
+.env.*
+!.env.example
+
+# Media outputs & generated files (ADDED)
+data/
+jobs_dir/
+clips_dir/
+*.mp4
+*.m4a
+*.webm
+*.ass
+
+# Packaging / build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Logs
+*.log
+
+# Local editor settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
