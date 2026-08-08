@@ -45,3 +45,8 @@ htmlcov/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Executable binaries
+*.exe
+ffmpeg.exe
+ffprobe.exe
