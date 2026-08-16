@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     groq_api_key: str = ""
+    groq_analysis_model: str = "llama-3.1-70b-versatile"
     openai_api_key: str = ""
     openai_transcription_model: str = "whisper-1"
     openai_analysis_model: str = "gpt-4o"

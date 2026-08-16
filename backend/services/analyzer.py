@@ -1,4 +1,4 @@
-"""LLM virality analysis for clip segment selection supporting Groq Free API & OpenAI."""
+"""LLM virality analysis for clip segment selection supporting Groq & OpenAI."""
 
 from __future__ import annotations
 
@@ -56,16 +56,21 @@ def analyze_viral_segments(
     client: OpenAI | None = None
     model_name: str = ""
 
-    # 1. Prefer Groq Free LLM (Llama 3.3)
+    # 1. Prefer Groq API
     if groq_key and str(groq_key).strip():
-        logger.info("Analyzing viral segments with Groq Free API (llama-3.3-70b-versatile)...")
+        groq_model = (
+            getattr(settings, "groq_analysis_model", None)
+            or os.getenv("GROQ_ANALYSIS_MODEL")
+            or "openai/gpt-oss-120b"
+        )
+        logger.info("Analyzing viral segments with Groq API (%s)...", groq_model)
         client = OpenAI(
             api_key=str(groq_key).strip(),
-            base_url="https://api.groq.com/openai/v1"
+            base_url="https://api.groq.com/openai/v1",
         )
-        model_name = os.getenv("GROQ_ANALYSIS_MODEL", "llama-3.3-70b-versatile")
+        model_name = groq_model
 
-    # 2. Fall back to OpenAI GPT-4o
+    # 2. Fall back to OpenAI
     elif openai_key and str(openai_key).strip():
         logger.info("Analyzing viral segments with OpenAI (%s)...", settings.openai_analysis_model)
         client = OpenAI(api_key=str(openai_key).strip())
@@ -86,7 +91,7 @@ def analyze_viral_segments(
                 {"role": "system", "content": ANALYSIS_SYSTEM_PROMPT},
                 {"role": "user", "content": user_prompt},
             ],
-            temperature=0.4,
+            temperature=0.3,
         )
         content = response.choices[0].message.content or "{}"
     except Exception as exc:
